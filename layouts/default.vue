@@ -6,6 +6,7 @@
       dark
       flat
       app
+      dense
     >
     </v-app-bar>
     <v-main class="overflow-hidden" style="height:100vh">

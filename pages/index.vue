@@ -11,16 +11,10 @@
           </v-col>
         </v-row>
         <v-row class="fill-height d-flex flex-row">
-          <v-col xl="2" lg="2">
-            <!--
-            <CustomCard :placeholder = "getPlaceholder('top_right_bottom_left')"/>
-              -->
-            <CustomCard/>
+          <v-col xl="3" lg="3">
+            <ActiveTrainees/>
           </v-col>
           <v-col>
-            <!--
-            <CustomCard :placeholder = "getPlaceholder('top_right_bottom_right')"/>
-              -->
             <CustomCard/>
           </v-col>
         </v-row>
@@ -28,15 +22,9 @@
     </v-row>
     <v-row class="mb-0 mx-0" style="min-height:50%">
       <v-col xl="8" lg="8">
-        <!--
-        <CustomCard :placeholder = "getPlaceholder('bottom_left')"/>
-          -->
         <DataTable :obj="example"/>
       </v-col>
       <v-col>
-        <!--
-        <CustomCard :placeholder = "getPlaceholder('bottom_right')"/>
-          -->
         <CustomCard/>
       </v-col>
     </v-row>
@@ -47,6 +35,7 @@
 import CustomCard from "~/components/customCard/CustomCard.vue"
 import ProfileInfo from "~/components/cards/index/ProfileInfo.vue"
 import DataTable from "~/components/cards/index/DataTable.vue"
+import ActiveTrainees from "~/components/cards/index/ActiveTrainees.vue"
 
 import example from "~/assets/example.js"
 
@@ -56,7 +45,8 @@ export default {
   components: {
     CustomCard,
     ProfileInfo,
-    DataTable
+    DataTable,
+    ActiveTrainees
   },
 
     data() {
