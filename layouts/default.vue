@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="overflow-hidden">
     <v-app-bar
       color="#1c4e9e"
       elevation="0"
@@ -7,10 +7,11 @@
       flat
       app
       dense
-      style="position:relative"
+      hide-on-scroll
+      scroll-target="#scroll-target"
     >
     </v-app-bar>
-    <v-main class="overflow-auto" style="height:95vh; scrollbar-width:auto">
+    <v-main id="scroll-target" class="overflow-auto" style="height:100vh; scrollbar-width:auto">
       <Nuxt/>
     </v-main>
   </v-app>
