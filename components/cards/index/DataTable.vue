@@ -1,8 +1,6 @@
 <template>
     <CustomCard
-        :card="{
-            'class': 'd-flex flex-column'
-        }"
+
         :title-icon-wrapper="{
             'position': 'relative',
             'class': 'blue--text'
@@ -10,11 +8,10 @@
         :title-wrapper="{
             'class': 'flex-grow-1 ml-2'
         }"
-
         :text-container="{
-            'class':'d-inline-block overflow-auto'
+            'class': 'd-flex flex-grow-1 overflow-hidden',
+            'height': '100%'
         }"
-
         :tooltip-container="{
             'left': true
         }"
@@ -25,17 +22,18 @@
             <CustomDataTable
                 :table="{
                     'headers': headers,
-                    'items': items,
+                    'items': data,
                     'dense': true,
                     'hide-default-footer': true,
-                    'class': 'overflow-hidden text-truncate text-overflow-ellipsis',
+                    'class': 'align-center text-overflow-ellipsis elevation-1',
+                    'style': 'height:1px flex-grow: 1'
                 }"
+                :data="data"
+                :headers="headerFilter"
             >
             </CustomDataTable>
-            {{headers}}
         </template>
         <template #tooltip-content>This is a Data Table</template>
-        
     </CustomCard>
 </template>
 
@@ -65,6 +63,12 @@ export default {
         },
     },
 
+    data: () => {
+        return {
+            'maxWidth': 100
+        }
+    },
+
     computed: {
         headers() {
             const headerTitles = this.headerFilter.map((header) => 
@@ -77,13 +81,13 @@ export default {
                 const o = {
                     'text': title,
                     'value': title.toLowerCase().replaceAll(' ', '_'),
-                    'width': '50px'
+                    'width': `${this.data.maxWidth}px`
                 };
                 return o;
             })
         },
 
-        items() {
+        data() {
             return this.obj.scores
             .map( (score) => Object.entries(score)
             .filter( (entry) => this.headerFilter.includes(entry[0])))
@@ -93,3 +97,8 @@ export default {
 }
 </script>
 
+<style scoped lang="scss">
+.v-data-table::v-deep .v-data-table__wrapper {
+  overflow: unset !important;
+}
+</style>

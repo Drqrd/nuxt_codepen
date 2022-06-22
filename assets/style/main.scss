@@ -5,3 +5,9 @@ html {
 ::-webkit-scrollbar {
     display: none;
 }
+
+.col {
+    display: flex;
+    flex-direction: column;
+  }
+

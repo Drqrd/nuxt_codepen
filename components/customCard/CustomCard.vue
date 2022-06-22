@@ -52,6 +52,12 @@ export default {
     props: {
         card: {
             type: Object,
+            default: () => {
+                return {
+                    'class': 'd-flex flex-column flex-grow-1 overflow-hidden',
+                    'style': 'height:1px'
+                }
+            }
         },
         titleContainer: {
             type: Object,
@@ -79,9 +85,19 @@ export default {
         },
         textContainer: {
             type: Object,
+            default: () => {
+                return {
+                    'class': 'flex-grow-1 overflow-auto',
+                }
+            }
         },
         tooltipContainer: {
             type: Object,
+            default: () => {
+                return {
+                    'top': true
+                }
+            }
         },
         tooltipIconWrapper: {
             type: Object,

@@ -1,19 +1,7 @@
 <template>
     <CustomCard
-        :card="{
-            'class': 'd-flex flex-column fill-height',
-        }"
-
         :title-container="{
             'class': 'd-flex justify-center'
-        }"
-
-        :text-container="{
-            'class': 'd-flex flex-column align-center flex-grow-1',
-        }" 
-        
-        :tooltip-container="{
-            'left': true,
         }"
     >
 
@@ -25,11 +13,12 @@
                 $formatDate(obj.date_simulated),
                 $formatPercentage(obj.call_score),
                 'This is a test string to play with white space and word break',
+                1,2,3,4,5,6,
             ]" :key="item"
 
             class="ma-auto"
             >
-                <v-col>{{item}}</v-col>
+                <v-col class="align-center">{{item}}</v-col>
             </v-row>
         </template>
         
