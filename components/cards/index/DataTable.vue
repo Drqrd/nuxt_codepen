@@ -3,33 +3,39 @@
         :card="{
             'class': 'd-flex flex-column'
         }"
-        :icon="{
+        :title-icon-wrapper="{
             'position': 'relative',
             'class': 'blue--text'
         }"
-        :title-content="{
+        :title-wrapper="{
             'class': 'flex-grow-1 ml-2'
         }"
 
-        :text-wrapper="{
-            'class':'flex-grow-1'
+        :text-container="{
+            'class':'d-inline-block overflow-auto'
         }"
 
-        :tooltip-wrapper="{
+        :tooltip-container="{
             'left': true
         }"
     >
-        <template #title-value>Evaluation</template>
-        <template #title-icon>mdi-file-table-box</template>
+        <template #title-content>Evaluation</template>
+        <template #title-icon-content>mdi-file-table-box</template>
         <template #text-content>
-            <CustomDataTable 
+            <CustomDataTable
                 :table="{
-                    'headerData': obj.scores.map( (score) => Object.entries(score).filter( (entry) => headerFilter.includes(entry[0])))
+                    'headers': headers,
+                    'items': items,
+                    'dense': true,
+                    'hide-default-footer': true,
+                    'class': 'overflow-hidden text-truncate text-overflow-ellipsis',
                 }"
             >
             </CustomDataTable>
+            {{headers}}
         </template>
         <template #tooltip-content>This is a Data Table</template>
+        
     </CustomCard>
 </template>
 
@@ -54,10 +60,36 @@ export default {
         headerFilter: {
             type: Array,
             default: () => {
-                return ['Index','Audio Time','Section','Score','Feedback','Input','Output']
+                return ['index','audio_time','section','score','call_stats_category','input','output']
             }
-        } 
+        },
     },
+
+    computed: {
+        headers() {
+            const headerTitles = this.headerFilter.map((header) => 
+                header.split('_')
+                .map((wordInHeader) => wordInHeader[0].toUpperCase() + wordInHeader.substring(1,wordInHeader.length))
+                .join(' ')
+            );
+
+            return headerTitles.map( (title) => {
+                const o = {
+                    'text': title,
+                    'value': title.toLowerCase().replaceAll(' ', '_'),
+                    'width': '50px'
+                };
+                return o;
+            })
+        },
+
+        items() {
+            return this.obj.scores
+            .map( (score) => Object.entries(score)
+            .filter( (entry) => this.headerFilter.includes(entry[0])))
+            .map( (items) => items.reduce((a,v) => ({...a, [v[0]] : v[1]}),{}))
+        }
+    }
 }
 </script>
 

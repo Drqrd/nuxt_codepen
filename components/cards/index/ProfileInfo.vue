@@ -1,37 +1,36 @@
 <template>
     <CustomCard
         :card="{
-            'class': 'd-flex flex-column'
+            'class': 'd-flex flex-column fill-height',
         }"
 
-        :title-wrapper="{
+        :title-container="{
             'class': 'd-flex justify-center'
         }"
 
-        :text-wrapper="{
-            'class': 'd-flex flex-column align-center flex-grow-1'
+        :text-container="{
+            'class': 'd-flex flex-column align-center flex-grow-1',
         }" 
-        :text-content="{
-            'class': 'my-auto'
-        }"
         
-        :tooltip-wrapper="{
+        :tooltip-container="{
             'left': true,
         }"
     >
 
-        <template #title-value>{{(obj['caller_profile'] || '')}}</template>
-        <template #title-icon>mdi-account</template>
+        <template #title-content>{{(obj['caller_profile'] || '')}}</template>
+        <template #title-icon-content>mdi-account</template>
 
         <template #text-content>
-            <div v-for="item in [
+            <v-row v-for="item in [
                 $formatDate(obj.date_simulated),
-                $formatPercentage(obj.call_score)
+                $formatPercentage(obj.call_score),
+                'This is a test string to play with white space and word break',
             ]" :key="item"
-                class="ma-auto"
+
+            class="ma-auto"
             >
-                {{item}}
-            </div>
+                <v-col>{{item}}</v-col>
+            </v-row>
         </template>
         
         <template #tooltip-content>Client Information</template>

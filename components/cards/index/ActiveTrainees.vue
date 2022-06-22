@@ -3,28 +3,46 @@
         :card="{
             'class':'d-flex flex-column'
         }" 
-        :title-wrapper="{
+        :title-container="{
             'class':'d-flex text-subtitle-2'
         }"
-        :title-content="{
+        :title-wrapper="{
             'class':'text-center flex-grow-1'
         }"
-        :icon="{
+        :title-icon-wrapper="{
             'position': 'relative',
             'class':'blue--text'
         }"
-        :text-wrapper="{
-            'class':'d-flex flex-wrap flex-grow-1'
+        :text-container="{
+            'class':'d-flex flex-column flex-grow-1 pa-8'
+        }"
+        :tooltip-container="{
+            'right': true
         }"
     >
-        <template #title-value>Active Trainees</template>
-        <template #title-icon>mdi-headset</template>
+        <template #title-content>Active Trainees</template>
+        <template #title-icon-content>mdi-headset</template>
         <template #text-content>
-            <div class="text-container--name"><div class="text">Total</div></div>
-            <div class="text-container--number"><div class="text">17</div></div>
-            <div class="text-container--name"><div class="text">With<br>Pending<br>Scenarios</div></div>
-            <div class="text-container--number"><div class="text">15</div></div>
+            <v-row>
+                <v-col class="text-container__name">
+                    Total
+                </v-col>
+                <v-spacer/>
+                <v-col class="text-container__number">
+                    17
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col class="text-container__name">
+                    With Pending Scenarios
+                </v-col>
+                <v-spacer/>
+                <v-col class="text-container__number">
+                    15
+                </v-col>
+            </v-row>
         </template>
+        <template #tooltip-content>Active Trainees</template>
     </CustomCard>
 </template>
 
@@ -40,23 +58,20 @@ export default {
 }
 </script>
 
-<style scoped>
-.text-container--name {
-    width: 50%;
-    font-size: small;
-    display: flex;
+<style scoped lang="scss">
+
+.row {
+    align-items: center;
 }
 
-.text-container--number {
-    width: 50%;
-    font-size:larger;
-    text-align: center;
-    display: flex;
-}
-
-.text {
-    width: 100%;
-    
-    margin:auto;
+.text-container{
+    &__name {
+        font-size: small;
+        line-height: normal;
+    }
+    &__number {
+        font-size:x-large;
+        color:black;
+    }
 }
 </style>

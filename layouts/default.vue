@@ -1,5 +1,5 @@
 <template>
-  <v-app class="d-flex">
+  <v-app>
     <v-app-bar
       color="#1c4e9e"
       elevation="0"
@@ -7,9 +7,10 @@
       flat
       app
       dense
+      style="position:relative"
     >
     </v-app-bar>
-    <v-main class="overflow-hidden" style="height:100vh">
+    <v-main class="overflow-auto" style="height:95vh; scrollbar-width:auto">
       <Nuxt/>
     </v-main>
   </v-app>
@@ -17,6 +18,6 @@
 
 <style scoped lang="scss">
 * {
-  background-color: darkgray
+  background-color: darkgray;
 }
 </style>

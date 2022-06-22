@@ -1,10 +1,8 @@
 <template>
     <v-card-text 
-            v-bind="wrapper"
-        >
-        <slot name='content'
-            v-bind="content">
-        </slot>
+        v-bind="container"
+    >
+        <slot name='content'></slot>
     </v-card-text>
 </template>
 
@@ -12,13 +10,9 @@
 export default {
     name: 'CustomCardText',
     props: {
-        wrapper: {
+        container: {
             type: Object
         },
-        content: {
-            type: Object
-        },
-        
     }
 }
 </script>

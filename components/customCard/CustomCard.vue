@@ -4,35 +4,32 @@
         height="100%"
         v-bind="card"
     >
-        <CustomCardTitle v-if="!$isEmptySlot('title-value') || !$isEmptySlot('title-icon')"
-            :wrapper="titleWrapper"
-            :icon="icon"
-            :content="titleContent"
+        <CustomCardTitle v-if="!$isEmptySlot('title-content') || !$isEmptySlot('title-icon-content')"
+            :container="titleContainer"
+            :icon-wrapper="titleIconWrapper"
+            :title-wrapper="titleWrapper"
         >
-            <template #value><slot name ='title-value'></slot></template>
-            <template #icon><slot name='title-icon'></slot></template>
+            <template #icon-content><slot name='title-icon-content'></slot></template>
+            <template #title-content><slot name ='title-content'></slot></template>
         </CustomCardTitle>
         
-        <v-divider v-if="!$isEmptySlot('title-value') || !$isEmptySlot('title-icon')" 
+        <v-divider v-if="!$isEmptySlot('title-content') || !$isEmptySlot('title-icon-content')" 
             v-bind="divider"
         />
 
         <CustomCardText
-            :wrapper="textWrapper"
-            :content="textContent"
+            :container="textContainer"
         >
             <template #content><slot name='text-content'></slot></template>
         </CustomCardText>
 
         <CustomTooltip v-if="!$isEmptySlot('tooltip-content')"
-            :icon-value="tooltipIconValue"
-            :icon="tooltipIcon"
-
-            :wrapper="tooltipWrapper"
-            :content="tooltipContent"
+            :container="tooltipContainer"
+            :icon-wrapper="tooltipIconWrapper"
+            :tooltip-wrapper="tooltipWrapper"
         >
-            <template #icon v-if="!$isEmptySlot('tooltip-icon')"><slot name='tooltip-icon'></slot></template>
-            <template #icon v-else>{{tooltipIconValue}}</template>
+            <template #icon-content v-if="!$isEmptySlot('tooltip-icon-content')"><slot name='tooltip-icon-content'></slot></template>
+            <template #icon-content v-else>{{tooltipIconContent}}</template>
             <template #content><slot name='tooltip-content'></slot></template>
         </CustomTooltip>
     </v-card>   
@@ -56,10 +53,10 @@ export default {
         card: {
             type: Object,
         },
-        titleWrapper: {
+        titleContainer: {
             type: Object,
         },
-        icon: {
+        titleIconWrapper: {
             type: Object,
             default: () => {
                 return {
@@ -69,7 +66,7 @@ export default {
                 }
             }
         },
-        titleContent: {
+        titleWrapper: {
             type: Object,
         },
         divider: {
@@ -80,24 +77,13 @@ export default {
                 }
             }
         },
-        textValue: {
-            type: Array,
-            default: null,
-        },
-        textWrapper: {
+        textContainer: {
             type: Object,
         },
-        textContent: {
+        tooltipContainer: {
             type: Object,
         },
-        tooltipWrapper: {
-            type: Object,
-        },
-        tooltipIconValue: {
-            type: String,
-            default:'mdi-help-circle'
-        },
-        tooltipIcon: {
+        tooltipIconWrapper: {
             type: Object,
             default: () => {
                 return {
@@ -108,9 +94,16 @@ export default {
                 }
             }
         },
-        tooltipContent: {
+        tooltipWrapper: {
             type: Object,
-        }
+        },
+
+
+
+        tooltipIconContent: {
+            type: String,
+            default:'mdi-help-circle'
+        },
     },
 }
 </script>

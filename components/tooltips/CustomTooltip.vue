@@ -1,40 +1,33 @@
 <template>
     <v-tooltip    
-        v-bind="wrapper"
+        v-bind="container"
     >
         <template #activator="{on, attrs}">
             <v-icon
-                v-bind="[icon,attrs]"
+                v-bind="[iconWrapper,attrs]"
                 v-on="on"
             >
-                <slot name='icon'></slot>
+                <slot name='icon-content'></slot>
             </v-icon>
         </template>
-        <span>
+        <span v-bind="tooltipWrapper">
             <slot name='content'></slot>
         </span>
     </v-tooltip>
 </template>
 
 <script>
-
-import CustomIcon from '~/components/CustomIcon.vue'
-
 export default {
     name: 'CustomTooltip',
 
-    components: {
-        CustomIcon, 
-    },
-
     props: {
-        wrapper: {
+        container: {
             type: Object
         },
-        icon: {
+        iconWrapper: {
             type: Object,
         },
-        content: {
+        tooltipWrapper: {
             type: Object
         }
     }

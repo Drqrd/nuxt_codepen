@@ -1,17 +1,17 @@
 <template>
     <v-card-title
-        v-bind="wrapper"
+        v-bind="container"
         style="height: 48px;"
     >
-    <CustomIcon v-if="!$isEmptySlot('icon')"
-        v-bind="icon"
+    <CustomIcon v-if="!$isEmptySlot('icon-content')"
+        v-bind="iconWrapper"
     >
-        <slot name='icon'></slot>
+        <slot name='icon-content'></slot>
     </CustomIcon>
     <div
-        v-bind="content"
+        v-bind="titleWrapper"
     >
-        <slot name='value'></slot>
+        <slot name='title-content'></slot>
     </div>
     </v-card-title>
 </template>
@@ -28,13 +28,13 @@ export default {
     },
 
     props: {
-        wrapper: {
+        container: {
             type: Object
         },
-        icon: {
+        iconWrapper: {
             type: Object
         },
-        content: {
+        titleWrapper: {
             type:Object
         },
     }

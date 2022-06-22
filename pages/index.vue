@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="d-flex flex-column" style="height: 100%">
+  <v-container fluid class="d-flex flex-column overflow-scroll" style="height: 100%">
     <v-row class="fill-height mt-0 mx-0">
       <v-col xl="3" lg="3">
         <ProfileInfo :obj="example"/>
@@ -21,7 +21,7 @@
       </v-col>  
     </v-row>
     <v-row class="mb-0 mx-0" style="min-height:50%">
-      <v-col xl="8" lg="8">
+      <v-col xl="7" lg="7" class="">
         <DataTable :obj="example"/>
       </v-col>
       <v-col>

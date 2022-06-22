@@ -2,8 +2,6 @@
     <v-data-table 
         v-bind="table"
     >
-    <slot></slot>
-    {{$log(table.headerData)}}
     </v-data-table>
 </template>
 
@@ -13,12 +11,8 @@ export default {
     props: {
         table: {
             type: Object
-        }
+        },
     },
-    methods: {
-        getHeaders() {
-            
-        }
-    }
 }
 </script>
+
