@@ -1,39 +1,41 @@
 <template>
-    <v-data-table 
+    <v-data-table
+        :custom-sort="customSort"
         v-bind="table"
+        class="d-flex flex-column overflow-auto"
+        fixed-header
+        disable-pagination
     >
         <template #body="{items}">
-        <tbody class="overflow-y-scroll scroll-bar-auto">
-            <tr v-for="item in items" :key="item.audio_time">
-                <td v-for="header in headers" :key="header">
-                    <v-tooltip v-if="checkTruncate(item[header])"
-                        right
-                    >
-                        <template #activator="{on, attrs}">
-                            <button
-                                v-bind="[attrs]"
-                                v-on="on"
-                            >
-                                ...
-                            </button>
-                        </template>
-                        <span>{{item[header]}}</span>
-                    </v-tooltip>
-                    <span v-else>{{item[header]}}</span>
-                </td>
-            </tr>
-        </tbody>
+            <tbody class="overflow-y-scroll scroll-bar-auto" style="height:1px">
+                <tr v-for="item in items" :key="item.audio_time">
+                    <td v-for="header in headers" :key="header">
+                        <v-tooltip v-if="checkTruncate(item[header])"
+                            right
+                        >
+                            <template #activator="{on, attrs}">
+                                <button
+                                    v-bind="[attrs]"
+                                    v-on="on"
+                                >
+                                    ...
+                                </button>
+                            </template>
+                            <span>{{header == 'audio_time' ? $formatTime(item[header]) : item[header]}}</span>
+                        </v-tooltip>
+                        <span v-else>{{header == 'audio_time' ? $formatTime(item[header]) : item[header]}}</span>
+                    </td>
+                </tr>
+            </tbody>
         </template>
     </v-data-table>
 </template>
 
 <script>
-import CustomTextTooltip from '~/components/tooltips/CustomTextTooltip.vue'
 
 export default {
     name: 'CustomDataTable',
     components: {
-        CustomTextTooltip
     },
 
     props: {
@@ -46,9 +48,17 @@ export default {
         headers: {
             type: Array,
         },
+        sortFunc: {
+            type: Function
+        },
         maxWidth: {
             type: Number,
             default: 50
+        }
+    },
+    data: () => {
+        return {
+            tableCellId : 1
         }
     },
 
@@ -56,10 +66,15 @@ export default {
         checkTruncate(val) {
             const o = document.createElement('span');
             o.innerText = val;
-            console.log(o.innerHTML + ", " + o.innerHTML.length)
 
             return o.innerHTML.length > 25;
-        }
+        },
+
+        customSort(items, index, isDesc) {
+        return items.sort((a,b) => {
+            return a - b;
+        })
+      }  
     },
 
 }

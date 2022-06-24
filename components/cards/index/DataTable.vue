@@ -1,16 +1,11 @@
 <template>
     <CustomCard
-
         :title-icon-wrapper="{
             'position': 'relative',
             'class': 'blue--text'
         }"
         :title-wrapper="{
             'class': 'flex-grow-1 ml-2'
-        }"
-        :text-container="{
-            'class': 'd-flex flex-grow-1 overflow-hidden',
-            'height': '100%'
         }"
         :tooltip-container="{
             'left': true
@@ -22,13 +17,14 @@
             <CustomDataTable
                 :table="{
                     'headers': headers,
-                    'items': data,
+                    'items': tableData,
                     'dense': true,
                     'hide-default-footer': true,
-                    'class': 'align-center text-overflow-ellipsis elevation-1',
-                    'style': 'height:1px flex-grow: 1'
+                    'class': 'align-center text-truncate text-overflow-ellipsis elevation-1',
+                    'style': 'height:1px flex-grow: 1',
+                    
                 }"
-                :data="data"
+                :data="tableData"
                 :headers="headerFilter"
             >
             </CustomDataTable>
@@ -81,24 +77,20 @@ export default {
                 const o = {
                     'text': title,
                     'value': title.toLowerCase().replaceAll(' ', '_'),
-                    'width': `${this.data.maxWidth}px`
+                    'width': `${this.$data.maxWidth}px`,
+                    'align': title == 'index' ? 'start' : 'center',
+                    'sortable': true
                 };
                 return o;
             })
         },
 
-        data() {
+        tableData() {
             return this.obj.scores
             .map( (score) => Object.entries(score)
             .filter( (entry) => this.headerFilter.includes(entry[0])))
             .map( (items) => items.reduce((a,v) => ({...a, [v[0]] : v[1]}),{}))
         }
-    }
+    },
 }
 </script>
-
-<style scoped lang="scss">
-.v-data-table::v-deep .v-data-table__wrapper {
-  overflow: unset !important;
-}
-</style>

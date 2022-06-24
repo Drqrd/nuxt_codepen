@@ -1,5 +1,6 @@
 <template>
-    <v-tooltip    
+    <v-tooltip
+        top
         v-bind="container"
     >
         <template #activator="{on, attrs}">

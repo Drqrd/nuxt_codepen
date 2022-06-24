@@ -7,7 +7,7 @@
       <v-col>
         <v-row>
           <v-col >
-            <CustomCard/> 
+            <CustomCard/>
           </v-col>
         </v-row>
         <v-row class="fill-height d-flex flex-row">
@@ -15,7 +15,7 @@
             <ActiveTrainees/>
           </v-col>
           <v-col>
-            <CustomCard/>
+            <AnimationExample/>
           </v-col>
         </v-row>
       </v-col>  
@@ -32,12 +32,13 @@
 </template>
 
 <script>
+import example from "~/assets/example.js"
+
 import CustomCard from "~/components/customCard/CustomCard.vue"
 import ProfileInfo from "~/components/cards/index/ProfileInfo.vue"
 import DataTable from "~/components/cards/index/DataTable.vue"
 import ActiveTrainees from "~/components/cards/index/ActiveTrainees.vue"
-
-import example from "~/assets/example.js"
+import AnimationExample from "~/components/cards/index/AnimationExample.vue"
 
 export default {
   name: 'IndexPage',
@@ -46,8 +47,9 @@ export default {
     CustomCard,
     ProfileInfo,
     DataTable,
-    ActiveTrainees
-  },
+    ActiveTrainees,
+    AnimationExample,
+},
 
     data() {
     return {

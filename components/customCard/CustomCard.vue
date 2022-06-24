@@ -2,6 +2,8 @@
     <v-card
         elevation="4"
         height="100%"
+        class="d-flex flex-column flex-grow-1 overflow-hidden"
+        style="height:1px"
         v-bind="card"
     >
         <CustomCardTitle v-if="!$isEmptySlot('title-content') || !$isEmptySlot('title-icon-content')"
@@ -13,7 +15,8 @@
             <template #title-content><slot name ='title-content'></slot></template>
         </CustomCardTitle>
         
-        <v-divider v-if="!$isEmptySlot('title-content') || !$isEmptySlot('title-icon-content')" 
+        <v-divider v-if="!$isEmptySlot('title-content') || !$isEmptySlot('title-icon-content')"
+            class="mx-2"
             v-bind="divider"
         />
 
@@ -52,12 +55,6 @@ export default {
     props: {
         card: {
             type: Object,
-            default: () => {
-                return {
-                    'class': 'd-flex flex-column flex-grow-1 overflow-hidden',
-                    'style': 'height:1px'
-                }
-            }
         },
         titleContainer: {
             type: Object,
@@ -77,27 +74,12 @@ export default {
         },
         divider: {
             type: Object,
-            default: () => {
-                return {
-                    'class':'mx-2'
-                }
-            }
         },
         textContainer: {
             type: Object,
-            default: () => {
-                return {
-                    'class': 'flex-grow-1 overflow-auto',
-                }
-            }
         },
         tooltipContainer: {
             type: Object,
-            default: () => {
-                return {
-                    'top': true
-                }
-            }
         },
         tooltipIconWrapper: {
             type: Object,

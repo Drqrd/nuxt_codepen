@@ -1,5 +1,7 @@
 <template>
-    <v-card-text 
+    <v-card-text
+        class="d-flex flex-column flex-grow-1 overflow-auto"
+        style="height:1px"
         v-bind="container"
     >
         <slot name='content'></slot>
