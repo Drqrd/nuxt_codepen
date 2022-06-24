@@ -16,16 +16,15 @@
         <template #text-content>
             <CustomDataTable
                 :table="{
-                    'headers': headers,
-                    'items': tableData,
                     'dense': true,
                     'hide-default-footer': true,
-                    'class': 'align-center text-truncate text-overflow-ellipsis elevation-1',
-                    'style': 'height:1px flex-grow: 1',
+                    'class': 'elevation-1',
+                    'style': 'flex-grow: 1',
                     
                 }"
-                :data="tableData"
-                :headers="headerFilter"
+                :headers="$data.headers"
+                :items="tableData"
+                
             >
             </CustomDataTable>
         </template>
@@ -51,21 +50,28 @@ export default {
             type: Object,
             default: null
         },
-        headerFilter: {
-            type: Array,
-            default: () => {
-                return ['index','audio_time','section','score','call_stats_category','input','output']
-            }
-        },
     },
 
     data: () => {
         return {
-            'maxWidth': 100
+            'maxWidth': 100,
+            'headers': [
+                { 'text': 'Index',               'value': 'index',               'width': 85,  'align': 'start',  'sortable': true, 'sort-icon':'mdi-sort-up' },
+                { 'text': 'Audio Time',          'value': 'audio_time',          'width': 113, 'align': 'center', 'sortable': true },
+                { 'text': 'Section',             'value': 'section',             'width': 100, 'align': 'center', 'sortable': true },
+                { 'text': 'Scores',              'value': 'scores',              'width': 100, 'align': 'center', 'sortable': true },
+                { 'text': 'Call Stats Category', 'value': 'call_stats_category', 'width': 165, 'align': 'center', 'sortable': true },
+                { 'text': 'Input',               'value': 'input',               'width': 120, 'align': 'center', 'sortable': true },
+                { 'text': 'Output',              'value': 'output',              'width': 100, 'align': 'center', 'sortable': true },
+            ],
+            'headerFilter': [
+                'index', 'audio_time', 'section', 'scores', 'call_stats_category', 'input', 'output'
+            ]
         }
     },
 
     computed: {
+        /*
         headers() {
             const headerTitles = this.headerFilter.map((header) => 
                 header.split('_')
@@ -84,13 +90,20 @@ export default {
                 return o;
             })
         },
+        */
 
         tableData() {
             return this.obj.scores
             .map( (score) => Object.entries(score)
-            .filter( (entry) => this.headerFilter.includes(entry[0])))
+            .filter( (entry) => this.$data.headerFilter.includes(entry[0])))
             .map( (items) => items.reduce((a,v) => ({...a, [v[0]] : v[1]}),{}))
         }
     },
 }
 </script>
+
+<style scoped lang="scss">
+.icon-absolute {
+    background-color: red;
+}
+</style>
